@@ -1,7 +1,7 @@
 import express from 'express';
 import body_parser from 'body-parser';
 import cors from 'cors';
-import usuarioRoute from './backend/src/routes/usuarios.routes';
+import usuarioRoute from './backend/src/routes/usuarios.routes.js';
 
 const port = 3000;
 
