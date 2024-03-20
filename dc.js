@@ -1,7 +1,7 @@
 import express from 'express';
 import body_parser from 'body-parser';
 import cors from 'cors';
-import usuarioRoute from './backend/src/routes/usuarios.routes';
+import usuarioRoute from './backend/src/routes/usuarios.routes.js';
 
 const port = 3000;
 
@@ -27,18 +27,18 @@ dc.use((req, res, next) => {
 dc.use(express.json());
 
 dc.use('/usuario', usuarioRoute);
-dc.use('/contrato', )
-dc.use('/empresa', );
-dc.use('/caja', );
-dc.use('/matodoPago', );
-dc.use('/categoria', );
-dc.use('/codigoBarra', );
-dc.use('/producto', );
-dc.use('/facturaProveedor', );
-dc.use('/cliente', );
-dc.use('/proveedor', );
-dc.use('/notiContrato', );
-dc.use('/cliente', );
+// dc.use('/contrato', )
+// dc.use('/empresa', );
+// dc.use('/caja', );
+// dc.use('/matodoPago', );
+// dc.use('/categoria', );
+// dc.use('/codigoBarra', );
+// dc.use('/producto', );
+// dc.use('/facturaProveedor', );
+// dc.use('/cliente', );
+// dc.use('/proveedor', );
+// dc.use('/notiContrato', );
+// dc.use('/cliente', );
 
 
 dc.listen(port,()=>{
