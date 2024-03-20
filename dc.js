@@ -2,6 +2,7 @@ import express from 'express';
 import body_parser from 'body-parser';
 import cors from 'cors';
 import usuarioRoute from './backend/src/routes/usuarios.routes.js';
+import contratoRouter from './backend/src/routes/contratos.routes.js';
 
 const port = 3000;
 
@@ -27,7 +28,7 @@ dc.use((req, res, next) => {
 dc.use(express.json());
 
 dc.use('/usuario', usuarioRoute);
-// dc.use('/contrato', )
+dc.use('/contrato', contratoRouter);
 // dc.use('/empresa', );
 // dc.use('/caja', );
 // dc.use('/matodoPago', );
