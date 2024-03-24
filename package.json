@@ -1,10 +1,10 @@
 {
   "name": "docher",
   "version": "1.0.0",
-  "main": "dc.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon dc.js"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
