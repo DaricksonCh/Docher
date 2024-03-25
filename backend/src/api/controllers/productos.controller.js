@@ -1,6 +1,5 @@
 import { validationResult } from 'express-validator';
-import pool from '../config/database'; // Asegúrate de importar tu configuración de base de datos
-
+import * as productoModel from '../models/productosModel.js';
 // Función para guardar un nuevo producto
 export const guardarProducto = async (req, res) => {
   try {
@@ -20,22 +19,21 @@ export const guardarProducto = async (req, res) => {
     } = req.body;
 
     // Verificar si el producto ya existe en la base de datos
-    const [existingProduct] = await pool.query(
-      "SELECT idProducto FROM productos WHERE nombreProducto = ?",
-      [nombreProducto]
-    );
+    // const [existingProduct] = await pool.query(
+    //   "SELECT idProducto FROM productos WHERE nombreProducto = ?",
+    //   [nombreProducto]
+    // );
 
-    if (existingProduct.length > 0) {
-      return res.status(409).json({
-        status: 409,
-        message: "El producto ya existe, no se pueden registrar datos repetidos."
-      });
-    }
+    // if (existingProduct.length > 0) {
+    //   return res.status(409).json({
+    //     status: 409,
+    //     message: "El producto ya existe, no se pueden registrar datos repetidos."
+    //   });
+    // }
 
     // Si el producto no existe, procedemos con la inserción
-    const sql = "INSERT INTO productos (nombreProducto, unidadMedida, descripcionProducto, precioProducto, stock, fk_codigoBarra, stockMin, fk_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    const [rows] = await pool.query(sql, [nombreProducto, unidadMedida, descripcionProducto, precioProducto, stock, fk_codigoBarra, stockMin, fk_categoria]);    
-    if (rows.affectedRows > 0) {
+    const success = await productoModel.guardarProducto(nombreProducto,unidadMedida,descripcionProducto,precioProducto,stock,fk_codigoBarra,stockMin,fk_categoria)
+    if (success) {
       res.status(200).json({ status: 200, message: "Se registró con éxito el producto." });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo registrar el producto." });
@@ -48,10 +46,8 @@ export const guardarProducto = async (req, res) => {
 // Función para listar todos los productos
 export const listarProductos = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      `SELECT * FROM productos`
-    );
-    if (result.length > 0) {
+    const productos = await productoModel.listarProductos();
+    if (productos.length > 0) {
       res.status(200).json(result);
     } else {
       res.status(204).json({
@@ -71,11 +67,15 @@ export const listarProductos = async (req, res) => {
 export const buscarProducto = async (req, res) => {
   try {
     let id = req.params.id;
-    const [result] = await pool.query(
-      "SELECT * FROM productos WHERE idProducto = ?",
-      [id]
-    );
-    res.status(200).json(result);
+    const producto = await productoModel.buscarProducto(id);
+    if (producto.length > 0) {
+      res.status(200).json(result);
+    } else {
+      res.status(204).json({
+        "status": 204,
+        "message": "No se encontraron producto."
+      });
+    }
   } catch (e) {
     res.status(500).json({ message: 'Error al buscar producto: ' + e });
   }
@@ -99,10 +99,8 @@ export const actualizarProducto = async (req, res) => {
       stockMin,
       fk_categoria
     } = req.body;
-
-    let sql = `UPDATE productos SET nombreProducto=?, unidadMedida=?, descripcionProducto=?, precioProducto=?, stock=?, fk_codigoBarra=?, stockMin=?, fk_categoria=? WHERE idProducto=?`;
-    const [rows] = await pool.query(sql, [nombreProducto, unidadMedida, descripcionProducto, precioProducto, stock, fk_codigoBarra, stockMin, fk_categoria, id]);
-    if (rows.affectedRows > 0) {
+    const success = await productoModel.actualizarProducto(nombreProducto,unidadMedida,descripcionProducto,precioProducto,stock,fk_codigoBarra,stockMin,fk_categoria);
+    if (success.affectedRows > 0) {
       res.status(200).json({ status: 200, message: "Se actualizó con éxito el producto" });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo actualizar el producto" });

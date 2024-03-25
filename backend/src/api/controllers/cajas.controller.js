@@ -48,7 +48,7 @@ export const listarCajas = async (req, res) => {
 export const buscarCaja = async (req, res) => {
   try {
     const id = req.params.id;
-    const caja = await cajasModel.buscarCajaPorId(id);
+    const caja = await cajasModel.buscarCaja(id);
 
     if (caja.length > 0) {
       res.status(200).json(caja);

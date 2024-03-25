@@ -18,7 +18,7 @@ export const listarCajas = async () => {
   }
 };
 
-export const buscarCajaPorId = async (id) => {
+export const buscarCaja = async (id) => {
   try {
     const [result] = await pool.query("SELECT * FROM cajas WHERE idcajas = ?", [id]);
     return result;
