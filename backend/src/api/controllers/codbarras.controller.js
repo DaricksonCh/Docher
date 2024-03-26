@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import pool from '../config/database'; // Asegúrate de importar tu configuración de base de datos
+import pool from '../config/'; // Asegúrate de importar tu configuración de base de datos
 
 // Función para guardar un nuevo código de barras
 export const guardarCodigoBarra = async (req, res) => {

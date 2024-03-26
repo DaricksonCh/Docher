@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { validarToken } from "../api/controllers/autentificacion.controller.js";
+
 import { guardarUsuario, listarUsuarios, buscarUsuario, actualizarUsuario, deshabilitarUsuario, habilitarUsuario } from '../api/controllers/usuario.controllers.js';
-import { validatorUsuario } from "../validation/usuario.validation.js";
+
 
 const router = Router();
 

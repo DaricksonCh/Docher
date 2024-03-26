@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarCaja, listarCajas, buscarCaja, actualizarCaja, deshabilitarCaja, habilitarCaja } from '../controllers/caja.controllers.js';
 import { validatorCaja } from "../validation/caja.validation.js";
 

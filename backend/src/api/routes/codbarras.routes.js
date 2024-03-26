@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarCodigoBarras, listarCodigosBarras, buscarCodigoBarras, actualizarCodigoBarras, deshabilitarCodigoBarras, habilitarCodigoBarras } from '../controllers/codigobarras.controllers.js';
 import { validatorCodigoBarras } from "../validation/codigobarras.validation.js";
 

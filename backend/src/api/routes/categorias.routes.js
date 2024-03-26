@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { guardarCategoria, listarCategorias, buscarCategoria, actualizarCategoria } from '../controllers/categoria.controllers.js';
-import { validarToken } from "../controllers/autentificacion.controller.js";
 import { validatorCategoria } from "../validation/categoria.validation.js";
 
 const categoria = Router();

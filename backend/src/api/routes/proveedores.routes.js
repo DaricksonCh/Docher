@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarProveedor, listarProveedores, buscarProveedor, actualizarProveedor, deshabilitarProveedor, habilitarProveedor } from '../controllers/proveedor.controllers.js';
-import { validatorProveedor } from "../validation/proveedor.validation.js";
+
 
 const router = Router();
 

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarNotificacionContrato, listarNotificacionesContratos, buscarNotificacionContrato, actualizarNotificacionContrato, desactivarNotificacionContrato, activarNotificacionContrato } from '../controllers/notificacionescontratos.controllers.js';
-import { validatorNotificacionContrato } from "../validation/notificacioncontrato.validation.js";
+
 
 const router = Router();
 
