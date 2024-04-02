@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
-import { guardarCodigoBarras, listarCodigosBarras, buscarCodigoBarras, actualizarCodigoBarras, deshabilitarCodigoBarras, habilitarCodigoBarras } from '../controllers/codigobarras.controllers.js';
-import { validatorCodigoBarras } from "../validation/codigobarras.validation.js";
+import { actualizarCodigoBarra, buscarCodigoBarra, guardarCodigoBarra, listarCodigoBarra } from "../controllers/codbarras.controller";
 
-const router = Router();
+const codbarraRouter = Router();
 
-router.post("/registrar", validarToken, validatorCodigoBarras, guardarCodigoBarras);
-router.get("/listar", validarToken, listarCodigosBarras);
-router.get("/buscar/:id", validarToken, buscarCodigoBarras);
-router.put("/editar/:id", validarToken, validatorCodigoBarras, actualizarCodigoBarras);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarCodigoBarras);
-router.patch("/habilitar/:id", validarToken, habilitarCodigoBarras);
+codbarraRouter.post("/registrar", guardarCodigoBarra) 
+codbarraRouter.get("/listar", listarCodigoBarra);
+codbarraRouter.get("/buscar/:id", buscarCodigoBarra );
+codbarraRouter.put("/editar/:id", actualizarCodigoBarra)
+codbarraRouter.patch("/deshabilitar/:id",)
+codbarraRouter.patch("/habilitar/:id", );
 
-export default router;
+export default codbarraRouter;

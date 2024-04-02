@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarFactura, listarFacturas, buscarFactura, actualizarFactura, deshabilitarFactura, habilitarFactura } from '../controllers/factura.controllers.js';
 import { validatorFactura } from "../validation/factura.validation.js";
 

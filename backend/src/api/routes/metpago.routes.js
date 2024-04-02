@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarMetodoPago, listarMetodosPago, buscarMetodoPago, actualizarMetodoPago, deshabilitarMetodoPago, habilitarMetodoPago } from '../controllers/metodopagos.controllers.js';
 import { validatorMetodoPago } from "../validation/metodopago.validation.js";
 

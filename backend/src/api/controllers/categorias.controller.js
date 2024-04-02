@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import * as categoriasModel from '../models/categoriasModel';
+import * as categoriasModel from '../models/categoriasModel.js';
 
 export const guardarCategoria = async (req, res) => {
   try {

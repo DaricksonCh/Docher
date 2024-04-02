@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
+
 import { guardarEmpresa, listarEmpresas, buscarEmpresa, actualizarEmpresa, deshabilitarEmpresa, habilitarEmpresa } from '../controllers/empresa.controllers.js';
 import { validatorEmpresa } from "../validation/empresa.validation.js";
 

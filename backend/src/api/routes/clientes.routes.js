@@ -1,15 +1,12 @@
 import { Router } from "express";
-import { validarToken } from "../controllers/autentificacion.controller.js";
-import { guardarCliente, listarClientes, buscarCliente, actualizarCliente, deshabilitarCliente, habilitarCliente } from '../controllers/cliente.controllers.js';
-import { validatorCliente } from "../validation/cliente.validation.js";
+import { actualizarCliente, buscarCliente, guardarCliente, listarClientes } from "../controllers/cliente.controller.js";
 
-const router = Router();
 
-router.post("/registrar", validarToken, validatorCliente, guardarCliente);
-router.get("/listar", validarToken, listarClientes);
-router.get("/buscar/:id", validarToken, buscarCliente);
-router.put("/editar/:id", validarToken, validatorCliente, actualizarCliente);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarCliente);
-router.patch("/habilitar/:id", validarToken, habilitarCliente);
+const clienteRouter = Router();
 
-export default router;
+clienteRouter.post("/registrar", guardarCliente);
+clienteRouter.get("/listar", listarClientes);
+clienteRouter.get("/buscar/:id", buscarCliente);
+clienteRouter.put("/editar/:id", actualizarCliente);
+
+export default clienteRouter;
