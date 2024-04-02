@@ -1,6 +1,4 @@
-import {pool} from '../database/conexion.js';
 import * as contratoModel from '../models/contratoModel.js';
-
 
 export const guardarContrato = async (req, res) => {
   try {

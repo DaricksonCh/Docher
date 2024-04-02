@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { guardarCategoria, listarCategorias, buscarCategoria, actualizarCategoria } from '../controllers/categoria.controllers.js';
-import { validatorCategoria } from "../validation/categoria.validation.js";
+import { actualizarCategoria, buscarCategoria, listarUsuarios, guardarCategoria  } from "../controllers/categorias.controller.js";
 
-const categoria = Router();
 
-categoria.post("/registrar", validarToken, validatorCategoria, guardarCategoria);
-categoria.get("/listar", validarToken, listarCategorias);
-categoria.get('/buscar/:id', validarToken, buscarCategoria);
-categoria.put("/editar/:id", validarToken, validatorCategoria, actualizarCategoria);
+const categoriaRoute = Router();
 
-export default categoria;
+categoriaRoute.post("/registrar", guardarCategoria);
+categoriaRoute.get("/listar",  listarUsuarios);
+categoriaRoute.get('/buscar/:id', buscarCategoria);
+categoriaRoute.put("/editar/:id", actualizarCategoria);
+
+export default categoriaRoute;   

@@ -1,6 +1,7 @@
 import express from 'express';
 import body_parser from 'body-parser';
 import cors from 'cors';
+import helmet from 'helmet';
 
 import cajaRouter from './backend/src/api/routes/contratos.routes.js';
 import categoriaRouter from './backend/src/api/routes/contratos.routes.js';
@@ -9,12 +10,12 @@ import codbarraRouter from './backend/src/api/routes/contratos.routes.js';
 import contratoRouter from './backend/src/api/routes/contratos.routes.js';
 import empresaRouter from './backend/src/api/routes/contratos.routes.js';
 import facproveedorRouter from './backend/src/api/routes/contratos.routes.js';
+import facturaRouter from './backend/src/api/routes/facturas.routes';
 import metpagoRouter from './backend/src/api/routes/contratos.routes.js';
 import notcontratoRouter from './backend/src/api/routes/contratos.routes.js';
 import productoRouter from './backend/src/api/routes/contratos.routes.js';
-import proveedorRouter from './backend/src/api/routes/contratos.routes.js';
-import Router from './backend/src/api/routes/contratos.routes.js';
-import usuarioRoute from './backend/src/api/routes/usuarios.routes.js';
+import proveedorRouter from './backend/src/api/routes/proveedores.routes.js';
+import usuarioRouter from './backend/src/api/routes/usuarios.routes.js';
 
 
 
@@ -25,6 +26,7 @@ const app = express();
 app.use(cors());
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended:false}));
+app.use(helmet());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,19 +41,19 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use('/usuario', usuarioRoute);
-app.use('/contrato', contratoRouter);
-// app.use('/empresa', );
 app.use('/caja', cajaRouter );
-// app.use('/matodoPago', );
-// app.use('/categoria', );
-app.use('/codigoBarra', codbarraRouter);
-// app.use('/producto', );
-// app.use('/facturaProveedor', );
-// app.use('/cliente', );
-// app.use('/proveedor', );
-// app.use('/notiContrato', );
+app.use('/categoria', categoriaRouter );
 app.use('/cliente', clienteRouter );
+app.use('/codigoBarra', codbarraRouter);
+app.use('/contrato', contratoRouter);
+app.use('/empresa', empresaRouter);
+app.use('/facProveedor',facproveedorRouter);
+app.use('/facturas',facturaRouter);
+app.use('/metPago', metpagoRouter);
+app.use('/notContrato', notcontratoRouter);
+app.use('/producto', productoRouter);
+app.use('/proveedor', proveedorRouter);
+app.use('/usuario', usuarioRouter);
 
 
 app.listen(port,()=>{

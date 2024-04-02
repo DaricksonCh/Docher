@@ -1,15 +1,12 @@
 import { Router } from "express";
+import { guardarFacturaProveedor, listarFacturasProveedor, buscarFacturaProveedor, actualizarFacturaProveedor } from '../controllers/facproveedor.controller.js';
 
-import { guardarFacturaProveedor, listarFacturasProveedor, buscarFacturaProveedor, actualizarFacturaProveedor, deshabilitarFacturaProveedor, habilitarFacturaProveedor } from '../controllers/facturaproveedor.controllers.js';
-import { validatorFacturaProveedor } from "../validation/facturaproveedor.validation.js";
+const facproveedorRouter = Router();
 
-const router = Router();
+facproveedorRouter.post("/registrar", guardarFacturaProveedor);
+facproveedorRouter.get("/listar", listarFacturasProveedor);
+facproveedorRouter.get("/buscar/:id", buscarFacturaProveedor);
+facproveedorRouter.put("/editar/:id", actualizarFacturaProveedor);
 
-router.post("/registrar", validarToken, validatorFacturaProveedor, guardarFacturaProveedor);
-router.get("/listar", validarToken, listarFacturasProveedor);
-router.get("/buscar/:id", validarToken, buscarFacturaProveedor);
-router.put("/editar/:id", validarToken, validatorFacturaProveedor, actualizarFacturaProveedor);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarFacturaProveedor);
-router.patch("/habilitar/:id", validarToken, habilitarFacturaProveedor);
 
-export default router;
+export default facproveedorRouter;

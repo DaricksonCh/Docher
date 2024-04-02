@@ -1,7 +1,5 @@
 import { validationResult } from 'express-validator';
-import pool from '../config/database'; // Asegúrate de importar tu configuración de base de datos
 
-// Función para guardar una nueva empresa
 export const guardarEmpresa = async (req, res) => {
   try {
     let error = validationResult(req);
@@ -22,10 +20,8 @@ export const guardarEmpresa = async (req, res) => {
       fk_contrato
     } = req.body;
 
-    // Si la empresa no existe, procedemos con la inserción
-    const sql = "INSERT INTO empresas (nombreEmpresa, telefonoEmpresa, tipoEmpresa, direccionEmpresa, departamentoEmpresa, municipioEmpresa, nitEmpresa, logoEmpresa, correoEmpresa, estado, fk_contrato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const [rows] = await pool.query(sql, [nombreEmpresa, telefonoEmpresa, tipoEmpresa, direccionEmpresa, departamentoEmpresa, municipioEmpresa, nitEmpresa, logoEmpresa, correoEmpresa, estado, fk_contrato]);
-    if (rows.affectedRows > 0) {
+    const result = await empresaModel.guardarEmpresa(nombreEmpresa, telefonoEmpresa, tipoEmpresa, direccionEmpresa, departamentoEmpresa, municipioEmpresa, nitEmpresa, logoEmpresa, correoEmpresa, estado, fk_contrato);
+    if (result) {
       res.status(200).json({ status: 200, message: "Se registró con éxito la empresa." });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo registrar la empresa." });
@@ -35,12 +31,9 @@ export const guardarEmpresa = async (req, res) => {
   }
 };
 
-// Función para listar todas las empresas
 export const listarEmpresas = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      `SELECT * FROM empresas`
-    );
+    const result = await empresaModel.listarEmpresas();
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
@@ -55,23 +48,18 @@ export const listarEmpresas = async (req, res) => {
       message: "Error al listar empresas: " + e,
     });
   }
-};
+}
 
-// Función para buscar una empresa por su ID
 export const buscarEmpresa = async (req, res) => {
   try {
     let id = req.params.id;
-    const [result] = await pool.query(
-      "SELECT * FROM empresas WHERE idempresa = ?",
-      [id]
-    );
+    const result = await empresaModel.buscarEmpresa(id);
     res.status(200).json(result);
   } catch (e) {
     res.status(500).json({ message: 'Error al buscar empresa: ' + e });
   }
 };
 
-// Función para actualizar una empresa
 export const actualizarEmpresa = async (req, res) => {
   try {
     let error = validationResult(req);
@@ -93,9 +81,8 @@ export const actualizarEmpresa = async (req, res) => {
       fk_contrato
     } = req.body;
 
-    let sql = `UPDATE empresas SET nombreEmpresa=?, telefonoEmpresa=?, tipoEmpresa=?, direccionEmpresa=?, departamentoEmpresa=?, municipioEmpresa=?, nitEmpresa=?, logoEmpresa=?, correoEmpresa=?, estado=?, fk_contrato=? WHERE idempresa=?`;
-    const [rows] = await pool.query(sql, [nombreEmpresa, telefonoEmpresa, tipoEmpresa, direccionEmpresa, departamentoEmpresa, municipioEmpresa, nitEmpresa, logoEmpresa, correoEmpresa, estado, fk_contrato, id]);
-    if (rows.affectedRows > 0) {
+    const result = await empresaModel.actualizarEmpresa(id, nombreEmpresa, telefonoEmpresa, tipoEmpresa, direccionEmpresa, departamentoEmpresa, municipioEmpresa, nitEmpresa, logoEmpresa, correoEmpresa, estado, fk_contrato);
+    if (result) {
       res.status(200).json({ status: 200, message: "Se actualizó con éxito la empresa" });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo actualizar la empresa" });
@@ -105,17 +92,30 @@ export const actualizarEmpresa = async (req, res) => {
   }
 };
 
-// Función para eliminar una empresa
-export const eliminarEmpresa = async (req, res) => {
+export const deshabilitarEmpresa = async (req, res) => {
   try {
     let id = req.params.id;
-    const [rows] = await pool.query("DELETE FROM empresas WHERE idempresa = ?", [id]);
-    if (rows.affectedRows > 0) {
-      res.status(200).json({ status: 200, message: "Se eliminó con éxito la empresa" });
+    const result = await empresaModel.deshabilitarEmpresa(id);
+    if (result) {
+      res.status(200).json({ status: 200, message: "Se deshabilitó con éxito la empresa" });
     } else {
-      res.status(401).json({ status: 401, message: "No se pudo eliminar la empresa" });
+      res.status(401).json({ status: 401, message: "No se pudo deshabilitar al empresa" });
     }
   } catch (e) {
-    res.status(500).json({ message: 'Error al eliminar empresa: ' + e });
+    res.status(500).json({ message: 'Error al deshabilitar la empresa: ' + e });
+  }
+};
+
+export const habilitarEmpresa = async (req, res) => {
+  try {
+    let id = req.params.id;
+    const result = await empresaModel.habilitarEmpresa(id);
+    if (result) {
+      res.status(200).json({ status: 200, message: "Se habilitó con éxito la empresa" });
+    } else {
+      res.status(404).json({ status: 404, message: "No se encontró la empresa para habilitar" });
+    }
+  } catch (e) {
+    res.status(500).json({ message: 'Error al habilitar empresa: ' + e });
   }
 };

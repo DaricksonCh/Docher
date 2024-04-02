@@ -1,15 +1,14 @@
 import { Router } from "express";
+import { guardarEmpresa, listarEmpresas, buscarEmpresa, actualizarEmpresa, deshabilitarEmpresa, habilitarEmpresa } from '../controllers/empresas.controller.js';
 
-import { guardarEmpresa, listarEmpresas, buscarEmpresa, actualizarEmpresa, deshabilitarEmpresa, habilitarEmpresa } from '../controllers/empresa.controllers.js';
-import { validatorEmpresa } from "../validation/empresa.validation.js";
 
-const router = Router();
+const empresaRouter = Router();
 
-router.post("/registrar", validarToken, validatorEmpresa, guardarEmpresa);
-router.get("/listar", validarToken, listarEmpresas);
-router.get("/buscar/:id", validarToken, buscarEmpresa);
-router.put("/editar/:id", validarToken, validatorEmpresa, actualizarEmpresa);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarEmpresa);
-router.patch("/habilitar/:id", validarToken, habilitarEmpresa);
+empresaRouter.post("/registrar", guardarEmpresa);
+empresaRouter.get("/listar", listarEmpresas);
+empresaRouter.get("/buscar/:id", buscarEmpresa);
+empresaRouter.put("/editar/:id", actualizarEmpresa);
+empresaRouter.patch("/deshabilitar/:id", deshabilitarEmpresa);
+empresaRouter.patch("/habilitar/:id", habilitarEmpresa);
 
-export default router;
+export default empresaRouter;

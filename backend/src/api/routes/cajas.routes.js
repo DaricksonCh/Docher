@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { actualizarCaja, buscarCaja, guardarCaja, listarCajas } from "../controllers/cajas.controller";
+import { actualizarCaja, buscarCaja, guardarCaja, listarCajas } from "../controllers/cajas.controller.js";
 
 const cajaRouter= Router();
 
