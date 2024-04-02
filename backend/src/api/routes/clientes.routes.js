@@ -1,13 +1,12 @@
 import { Router } from "express";
-import { guardarCliente, listarClientes, buscarCliente, actualizarCliente } from '../controllers/cliente.controllers.js';
-import { validatorCliente } from "../validation/cliente.validation.js";
-
-const router = Router();
-
-router.post("/registrar", validarToken, validatorCliente, guardarCliente);
-router.get("/listar", validarToken, listarClientes);
-router.get("/buscar/:id", validarToken, buscarCliente);
-router.put("/editar/:id", validarToken, validatorCliente, actualizarCliente);
+import { actualizarCliente, buscarCliente, guardarCliente, listarClientes } from "../controllers/cliente.controller.js";
 
 
-export default router;
+const clienteRouter = Router();
+
+clienteRouter.post("/registrar", guardarCliente);
+clienteRouter.get("/listar", listarClientes);
+clienteRouter.get("/buscar/:id", buscarCliente);
+clienteRouter.put("/editar/:id", actualizarCliente);
+
+export default clienteRouter;

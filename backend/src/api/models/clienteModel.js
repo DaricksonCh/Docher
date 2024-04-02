@@ -6,7 +6,7 @@ export const guardarCliente = async (nombreCliente, documentoCliente, correoClie
         const [rows] = await pool.query(sql, [nombreCliente, documentoCliente, correoCliente, telefonoCliente, direccionCliente]);
         return rows.affectedRows > 0;
     } catch (e) {
-        throw e;
+        throw new Error('Error al guardar cliente') + e;
     }
 }
 

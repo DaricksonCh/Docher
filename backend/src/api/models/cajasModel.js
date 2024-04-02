@@ -37,11 +37,3 @@ export const actualizarCaja = async (id, nombreCaja, totalCaja, fk_empresa, fk_f
   }
 };
 
-export const eliminarCaja = async (id) => {
-  try {
-    const [rows] = await pool.query("DELETE FROM cajas WHERE idcajas = ?", [id]);
-    return rows.affectedRows > 0;
-  } catch (e) {
-    throw e;
-  }
-};

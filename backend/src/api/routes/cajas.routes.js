@@ -1,15 +1,17 @@
 import { Router } from "express";
+import { actualizarCaja, buscarCaja, guardarCaja, listarCajas } from "../controllers/cajas.controller";
 
-import { guardarCaja, listarCajas, buscarCaja, actualizarCaja, deshabilitarCaja, habilitarCaja } from '../controllers/caja.controllers.js';
-import { validatorCaja } from "../validation/caja.validation.js";
 
-const router = Router();
 
-router.post("/registrar", validarToken, validatorCaja, guardarCaja);
-router.get("/listar", validarToken, listarCajas);
-router.get("/buscar/:id", validarToken, buscarCaja);
-router.put("/editar/:id", validarToken, validatorCaja, actualizarCaja);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarCaja);
-router.patch("/habilitar/:id", validarToken, habilitarCaja);
 
-export default router;
+
+const cajaRouter= Router();
+
+cajaRouter.post("/registrar", guardarCaja);
+cajaRouter.get("/listar", listarCajas);
+cajaRouter.get("/buscar/:id", buscarCaja);
+cajaRouter.put("/editar/:id",  actualizarCaja);
+cajaRouter.patch("/deshabilitar/:id", );
+cajaRouter.patch("/habilitar/:id",  );
+
+export default cajaRouter;

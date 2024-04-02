@@ -1,7 +1,6 @@
 import { validationResult } from 'express-validator';
 import * as clienteModel from '../models/clienteModel.js'
 
-// Función para guardar un nuevo cliente
 export const guardarCliente = async (req, res) => {
   try {
     let error = validationResult(req);

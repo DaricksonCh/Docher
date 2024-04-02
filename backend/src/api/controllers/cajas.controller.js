@@ -83,18 +83,3 @@ export const actualizarCaja = async (req, res) => {
   }
 };
 
-// Función para eliminar una caja
-export const eliminarCaja = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const success = await cajasModel.eliminarCaja(id);
-
-    if (success) {
-      res.status(200).json({ status: 200, message: "Se eliminó con éxito la caja." });
-    } else {
-      res.status(401).json({ status: 401, message: "No se pudo eliminar la caja." });
-    }
-  } catch (e) {
-    res.status(500).json({ message: 'Error al eliminar caja: ' + e });
-  }
-};
