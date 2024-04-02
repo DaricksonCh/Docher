@@ -1,6 +1,7 @@
 import {pool} from '../database/conexion.js';
+import * as contratoModel from '../models/contratoModel.js';
 
-// Función para guardar un contrato
+
 export const guardarContrato = async (req, res) => {
   try {
     let error = validationResult(req);
@@ -14,38 +15,22 @@ export const guardarContrato = async (req, res) => {
       valorContrato
     } = req.body;
 
-    // Verificar si el contrato ya existe en la tabla de contratos
-    const [existingContract] = await pool.query(
-      "SELECT idContrato FROM contratos WHERE numeroContrato = ?",
-      [numeroContrato]
-    );
-
-    if (existingContract.length > 0) {
-      return res.status(409).json({
-        status: 409,
-        message: "El contrato ya existe, no se pueden registrar datos repetidos."
-      });
-    }
-
-    // Si el contrato no existe, procedemos con la inserción
-    const sql = "INSERT INTO contratos (numeroContrato, fechaInicio, fechaFin, valorContrato) VALUES (?, ?, ?, ?)";
-    const [rows] = await pool.query(sql, [numeroContrato, fechaInicio, fechaFin, valorContrato]);
-    if (rows.affectedRows > 0) {
-      res.status(200).json({ status: 200, message: "Se registró con éxito el contrato." });
+    const result = await contratoModel.guardarContrato(numeroContrato, fechaInicio, fechaFin, valorContrato);
+    if (result.status === 409) {
+      return res.status(409).json(result);
+    } else if (result.status === 200) {
+      res.status(200).json(result);
     } else {
-      res.status(401).json({ status: 401, message: "No se pudo registrar el contrato." });
+      res.status(401).json(result);
     }
   } catch (e) {
     res.status(500).json({ message: "Error en guardarContrato: " + e });
   }
 };
 
-// Función para listar todos los contratos
 export const listarContratos = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      `SELECT * FROM contratos`
-    );
+    const result = await contratoModel.listarContratos();
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
@@ -62,21 +47,16 @@ export const listarContratos = async (req, res) => {
   }
 };
 
-// Función para buscar un contrato por su ID
 export const buscarContrato = async (req, res) => {
   try {
     let id = req.params.id;
-    const [result] = await pool.query(
-      "SELECT * FROM contratos WHERE idContrato = ?",
-      [id]
-    );
+    const result = await contratoModel.buscarContrato(id);
     res.status(200).json(result);
   } catch (e) {
     res.status(500).json({ message: 'Error al buscar contrato: ' + e });
   }
 };
 
-// Función para actualizar un contrato
 export const actualizarContrato = async (req, res) => {
   try {
     let error = validationResult(req);
@@ -85,9 +65,9 @@ export const actualizarContrato = async (req, res) => {
     }
     let id = req.params.id;
     let { numeroContrato, fechaInicio, fechaFin, valorContrato } = req.body;
-    let sql = `UPDATE contratos SET numeroContrato=?, fechaInicio=?, fechaFin=?, valorContrato=? WHERE idContrato=?`;
-    const [rows] = await pool.query(sql, [numeroContrato, fechaInicio, fechaFin, valorContrato, id]);
-    if (rows.affectedRows > 0) {
+
+    const result = await contratoModel.actualizarContrato(id, numeroContrato, fechaInicio, fechaFin, valorContrato);
+    if (result) {
       res.status(200).json({ status: 200, message: "Se actualizó con éxito el contrato" });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo actualizar el contrato" });
@@ -97,13 +77,11 @@ export const actualizarContrato = async (req, res) => {
   }
 };
 
-// Función para deshabilitar un contrato
 export const deshabilitarContrato = async (req, res) => {
   try {
     let id = req.params.id;
-    let sql = `UPDATE contratos SET estado = 0 WHERE idContrato = ?`;
-    const [rows] = await pool.query(sql, [id]);
-    if (rows.affectedRows > 0) {
+    const result = await contratoModel.deshabilitarContrato(id);
+    if (result) {
       res.status(200).json({ status: 200, message: "Se deshabilitó con éxito el contrato" });
     } else {
       res.status(401).json({ status: 401, message: "No se pudo deshabilitar el contrato" });
@@ -113,13 +91,11 @@ export const deshabilitarContrato = async (req, res) => {
   }
 };
 
-// Función para habilitar un contrato
 export const habilitarContrato = async (req, res) => {
   try {
     let id = req.params.id;
-    let sql = `UPDATE contratos SET estado = 1 WHERE idContrato = ?`;
-    const [rows] = await pool.query(sql, [id]);
-    if (rows.affectedRows > 0) {
+    const result = await contratoModel.habilitarContrato(id);
+    if (result) {
       res.status(200).json({ status: 200, message: "Se habilitó con éxito el contrato" });
     } else {
       res.status(404).json({ status: 404, message: "No se encontró el contrato para habilitar" });

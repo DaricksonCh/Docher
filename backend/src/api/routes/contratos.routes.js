@@ -1,14 +1,13 @@
 import { Router } from "express";
+import { actualizarContrato, buscarContrato, deshabilitarContrato, guardarContrato, habilitarContrato, listarContratos } from "../controllers/contratos.controller";
 
-import { guardarContrato, listarContratos, buscarContrato, actualizarContrato, deshabilitarContrato, habilitarContrato } from '../api/controllers/contrato.controllers.js';
+const contratoRouter = Router();
 
-const router = Router();
+contratoRouter.post("/registrar",guardarContrato );
+contratoRouter.get("/listar", listarContratos);
+contratoRouter.get("/buscar/:id", buscarContrato);
+contratoRouter.put("/editar/:id", actualizarContrato);
+contratoRouter.patch("/deshabilitar/:id", deshabilitarContrato);
+contratoRouter.patch("/habilitar/:id", habilitarContrato);
 
-router.post("/registrar", validarToken, validatorContrato, guardarContrato);
-router.get("/listar", validarToken, listarContratos);
-router.get("/buscar/:id", validarToken, buscarContrato);
-router.put("/editar/:id", validarToken, validatorContrato, actualizarContrato);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarContrato);
-router.patch("/habilitar/:id", validarToken, habilitarContrato);
-
-export default router;
+export default contratoRouter;

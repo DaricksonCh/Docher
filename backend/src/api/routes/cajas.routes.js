@@ -1,10 +1,6 @@
 import { Router } from "express";
 import { actualizarCaja, buscarCaja, guardarCaja, listarCajas } from "../controllers/cajas.controller";
 
-
-
-
-
 const cajaRouter= Router();
 
 cajaRouter.post("/registrar", guardarCaja);
