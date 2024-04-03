@@ -4,11 +4,11 @@ import { guardarProducto, listarProductos, buscarProducto, actualizarProducto, d
 
 const productoRouter = Router();
 
-productoRouter.post("/registrar", validarToken, validatorProducto, guardarProducto);
-productoRouter.get("/listar", validarToken, listarProductos);
-productoRouter.get("/buscar/:id", validarToken, buscarProducto);
-productoRouter.put("/editar/:id", validarToken, validatorProducto, actualizarProducto);
-productoRouter.patch("/deshabilitar/:id", validarToken, deshabilitarProducto);
-productoRouter.patch("/habilitar/:id", validarToken, habilitarProducto);
+productoRouter.post("/registrar", guardarProducto);
+productoRouter.get("/listar", listarProductos);
+productoRouter.get("/buscar/:id", buscarProducto);
+productoRouter.put("/editar/:id", actualizarProducto);
+productoRouter.patch("/deshabilitar/:id",deshabilitarProducto);
+productoRouter.patch("/habilitar/:id", habilitarProducto);
 
 export default productoRouter;

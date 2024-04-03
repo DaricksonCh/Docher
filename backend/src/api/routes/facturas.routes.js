@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { guardarFactura, listarFacturas, buscarFactura, actualizarFactura, deshabilitarFactura, habilitarFactura } from '../controllers/factura.controller.js';
+import { guardarFactura, listarFacturas, buscarFactura, actualizarFactura} from '../controllers/factura.controller.js';
 const facturaRouter = Router();
 
 facturaRouter.post("/registrar", guardarFactura);

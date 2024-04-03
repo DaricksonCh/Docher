@@ -1,14 +1,13 @@
 import { Router } from "express";
-import { guardarUsuario, listarUsuarios, buscarUsuario, actualizarUsuario, deshabilitarUsuario, habilitarUsuario } from '../controllers/usuarios.controller';
+import { registrarUsuario, listarUsuarios, buscarUsuario, actualizarUsuario } from '../controllers/usuarios.controller.js';
 
 
 const usuarioRouter = Router();
 
-usuarioRouter.post("/registrar", validatorUsuario, guardarUsuario);
+usuarioRouter.post("/registrar", registrarUsuario);
 usuarioRouter.get("/listar", listarUsuarios);
 usuarioRouter.get("/buscar/:id", buscarUsuario);
-usuarioRouter.put("/editar/:id", validatorUsuario, actualizarUsuario);
-usuarioRouter.patch("/deshabilitar/:id", deshabilitarUsuario);
-usuarioRouter.patch("/habilitar/:id", habilitarUsuario);
+usuarioRouter.put("/editar/:id", actualizarUsuario);
+
 
 export default usuarioRouter;

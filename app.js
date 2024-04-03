@@ -10,7 +10,7 @@ import codbarraRouter from './backend/src/api/routes/contratos.routes.js';
 import contratoRouter from './backend/src/api/routes/contratos.routes.js';
 import empresaRouter from './backend/src/api/routes/contratos.routes.js';
 import facproveedorRouter from './backend/src/api/routes/contratos.routes.js';
-import facturaRouter from './backend/src/api/routes/facturas.routes';
+import facturaRouter from './backend/src/api/routes/facturas.routes.js';
 import metpagoRouter from './backend/src/api/routes/contratos.routes.js';
 import notcontratoRouter from './backend/src/api/routes/contratos.routes.js';
 import productoRouter from './backend/src/api/routes/contratos.routes.js';

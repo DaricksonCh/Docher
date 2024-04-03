@@ -4,11 +4,11 @@ import { guardarProveedor, listarProveedores, buscarProveedor, actualizarProveed
 
 const proveedorRoute = Router();
 
-proveedorRoute.post("/registrar", validarToken, validatorProveedor, guardarProveedor);
-proveedorRoute.get("/listar", validarToken, listarProveedores);
-proveedorRoute.get("/buscar/:id", validarToken, buscarProveedor);
-proveedorRoute.put("/editar/:id", validarToken, validatorProveedor, actualizarProveedor);
-proveedorRoute.patch("/deshabilitar/:id", validarToken, deshabilitarProveedor);
-proveedorRoute.patch("/habilitar/:id", validarToken, habilitarProveedor);
+proveedorRoute.post("/registrar", guardarProveedor);
+proveedorRoute.get("/listar", listarProveedores);
+proveedorRoute.get("/buscar/:id", buscarProveedor);
+proveedorRoute.put("/editar/:id", actualizarProveedor);
+proveedorRoute.patch("/deshabilitar/:id", deshabilitarProveedor);
+proveedorRoute.patch("/habilitar/:id", habilitarProveedor);
 
 export default proveedorRoute;

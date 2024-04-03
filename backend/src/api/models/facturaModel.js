@@ -1,4 +1,4 @@
-import pool from '../../config/conexion.js';
+import { pool } from '../../config/conexion.js';
 
 export const guardarFactura = async (fechaFactura, precioTotal, codigoFactura, cantidadProducto, fk_producto) => {
     try {

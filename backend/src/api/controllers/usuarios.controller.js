@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import * as usuarioModel from '../models/usuarioModel.js';
-import { pool } from '../../config/conexion.js';
+
 
 // Función para registrar un nuevo usuario
 export const registrarUsuario = async (req, res) => {

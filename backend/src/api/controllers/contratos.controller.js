@@ -1,4 +1,5 @@
-import * as contratoModel from '../models/contratoModel.js';
+import * as contratoModel  from "../models/contratos.Models.js";
+
 
 export const guardarContrato = async (req, res) => {
   try {
@@ -13,7 +14,7 @@ export const guardarContrato = async (req, res) => {
       valorContrato
     } = req.body;
 
-    const result = await contratoModel.guardarContrato(numeroContrato, fechaInicio, fechaFin, valorContrato);
+    const result = await contratoModel.guardarContratosModel(numeroContrato, fechaInicio, fechaFin, valorContrato);
     if (result.status === 409) {
       return res.status(409).json(result);
     } else if (result.status === 200) {
@@ -28,7 +29,7 @@ export const guardarContrato = async (req, res) => {
 
 export const listarContratos = async (req, res) => {
   try {
-    const result = await contratoModel.listarContratos();
+    const result = await contratoModel.listarContratosModel();
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
