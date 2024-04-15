@@ -1,15 +1,14 @@
 import { Router } from "express";
+import { guardarNotificacionContrato, listarNotificacionesContratos, buscarNotificacionContrato, actualizarNotificacionContrato, desactivarNotificacionContrato, activarNotificacionContrato } from '../controllers/notcontratos.controller.js';
 
-import { guardarNotificacionContrato, listarNotificacionesContratos, buscarNotificacionContrato, actualizarNotificacionContrato, desactivarNotificacionContrato, activarNotificacionContrato } from '../controllers/notificacionescontratos.controllers.js';
 
+const notcontratoRouter = Router();
 
-const router = Router();
+notcontratoRouter.post("/registrar", guardarNotificacionContrato);
+notcontratoRouter.get("/listar", listarNotificacionesContratos);
+notcontratoRouter.get("/buscar/:id", buscarNotificacionContrato);
+notcontratoRouter.put("/editar/:id", actualizarNotificacionContrato);
+notcontratoRouter.patch("/desactivar/:id", desactivarNotificacionContrato);
+notcontratoRouter.patch("/activar/:id", activarNotificacionContrato);
 
-router.post("/registrar", validarToken, validatorNotificacionContrato, guardarNotificacionContrato);
-router.get("/listar", validarToken, listarNotificacionesContratos);
-router.get("/buscar/:id", validarToken, buscarNotificacionContrato);
-router.put("/editar/:id", validarToken, validatorNotificacionContrato, actualizarNotificacionContrato);
-router.patch("/desactivar/:id", validarToken, desactivarNotificacionContrato);
-router.patch("/activar/:id", validarToken, activarNotificacionContrato);
-
-export default router;
+export default notcontratoRouter;

@@ -1,15 +1,14 @@
 import { Router } from "express";
+import { guardarProducto, listarProductos, buscarProducto, actualizarProducto, deshabilitarProducto, habilitarProducto } from '../controllers/productos.controller.js';
 
-import { guardarProducto, listarProductos, buscarProducto, actualizarProducto, deshabilitarProducto, habilitarProducto } from '../controllers/producto.controllers.js';
 
+const productoRouter = Router();
 
-const router = Router();
+productoRouter.post("/registrar", guardarProducto);
+productoRouter.get("/listar", listarProductos);
+productoRouter.get("/buscar/:id", buscarProducto);
+productoRouter.put("/editar/:id", actualizarProducto);
+productoRouter.patch("/deshabilitar/:id",deshabilitarProducto);
+productoRouter.patch("/habilitar/:id", habilitarProducto);
 
-router.post("/registrar", validarToken, validatorProducto, guardarProducto);
-router.get("/listar", validarToken, listarProductos);
-router.get("/buscar/:id", validarToken, buscarProducto);
-router.put("/editar/:id", validarToken, validatorProducto, actualizarProducto);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarProducto);
-router.patch("/habilitar/:id", validarToken, habilitarProducto);
-
-export default router;
+export default productoRouter;

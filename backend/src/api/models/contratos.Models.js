@@ -1,6 +1,6 @@
-import pool from '../../config/conexion.js';
+import { pool } from '../../config/conexion.js';
 
-export const guardarContrato = async (numeroContrato, fechaInicio, fechaFin, valorContrato) => {
+export const guardarContratosModel = async (numeroContrato, fechaInicio, fechaFin, valorContrato) => {
     try {
         // Verificar si el contrato ya existe en la tabla de contratos
         const [existingContract] = await pool.query(
@@ -28,7 +28,7 @@ export const guardarContrato = async (numeroContrato, fechaInicio, fechaFin, val
     }
 };
 
-export const listarContratos = async () => {
+export const listarContratosModel = async () => {
     try {
         const [result] = await pool.query(`SELECT * FROM contratos`);
         return result;
@@ -37,7 +37,7 @@ export const listarContratos = async () => {
     }
 };
 
-export const buscarContrato = async (id) => {
+export const buscarContratoModel = async (id) => {
     try {
         const [result] = await pool.query(
             "SELECT * FROM contratos WHERE idContrato = ?",
@@ -49,7 +49,7 @@ export const buscarContrato = async (id) => {
     }
 };
 
-export const actualizarContrato = async (id, numeroContrato, fechaInicio, fechaFin, valorContrato) => {
+export const actualizarContratoModel = async (id, numeroContrato, fechaInicio, fechaFin, valorContrato) => {
     try {
         let sql = `UPDATE contratos SET numeroContrato=?, fechaInicio=?, fechaFin=?, valorContrato=? WHERE idContrato=?`;
         const [rows] = await pool.query(sql, [numeroContrato, fechaInicio, fechaFin, valorContrato, id]);
@@ -59,7 +59,7 @@ export const actualizarContrato = async (id, numeroContrato, fechaInicio, fechaF
     }
 };
 
-export const deshabilitarContrato = async (id) => {
+export const deshabilitarContratoModel= async (id) => {
     try {
         let sql = `UPDATE contratos SET estado = 0 WHERE idContrato = ?`;
         const [rows] = await pool.query(sql, [id]);
@@ -69,7 +69,7 @@ export const deshabilitarContrato = async (id) => {
     }
 };
 
-export const habilitarContrato = async (id) => {
+export const habilitarContratoModel = async (id) => {
     try {
         let sql = `UPDATE contratos SET estado = 1 WHERE idContrato = ?`;
         const [rows] = await pool.query(sql, [id]);

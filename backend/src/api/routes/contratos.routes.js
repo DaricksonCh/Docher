@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { actualizarContrato, buscarContrato, deshabilitarContrato, guardarContrato, habilitarContrato, listarContratos } from "../controllers/contratos.controller";
+import { actualizarContrato, buscarContrato, deshabilitarContrato, guardarContrato, habilitarContrato, listarContratos } from "../controllers/contratos.controller.js";
 
 const contratoRouter = Router();
 

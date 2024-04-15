@@ -1,5 +1,5 @@
 import {pool} from '../../config/conexion.js';
-import { buscarProducto } from '../controllers/productos.controller.js';
+
 
 export const guardarProducto = async ( nombreProducto,unidadMedida,descripcionProducto,precioProducto,stock,fk_codigoBarra,stockMin,fk_categoria)=>{
   try{

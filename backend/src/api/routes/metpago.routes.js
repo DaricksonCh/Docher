@@ -1,15 +1,12 @@
 import { Router } from "express";
+import { guardarMetodoPago, listarMetodosPago, buscarMetodoPago, actualizarMetodoPago} from '../controllers/metpago.controller.js';
 
-import { guardarMetodoPago, listarMetodosPago, buscarMetodoPago, actualizarMetodoPago, deshabilitarMetodoPago, habilitarMetodoPago } from '../controllers/metodopagos.controllers.js';
-import { validatorMetodoPago } from "../validation/metodopago.validation.js";
+const metpagoRouter = Router();
 
-const router = Router();
+metpagoRouter.post("/registrar", guardarMetodoPago);
+metpagoRouter.get("/listar", listarMetodosPago);
+metpagoRouter.get("/buscar/:id", buscarMetodoPago);
+metpagoRouter.put("/editar/:id", actualizarMetodoPago);
 
-router.post("/registrar", validarToken, validatorMetodoPago, guardarMetodoPago);
-router.get("/listar", validarToken, listarMetodosPago);
-router.get("/buscar/:id", validarToken, buscarMetodoPago);
-router.put("/editar/:id", validarToken, validatorMetodoPago, actualizarMetodoPago);
-router.patch("/deshabilitar/:id", validarToken, deshabilitarMetodoPago);
-router.patch("/habilitar/:id", validarToken, habilitarMetodoPago);
 
-export default router;
+export default metpagoRouter;
