@@ -1,31 +1,114 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
     margin: 0;
     padding: 0;
-    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.content{
-    width: 100%;
-    height: 100dvh;
-    background-image: linear-gradient(180deg, #091125 0%, #227abb 86%);
+body {
+    background-color: #9fc9d3;
+    background-image: linear-gradient(to bottom right, #9fc9d3, #7d8a8d);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
-/* .fondoContend{
-    display: flex;
-    align-items: end;
-    z-index: 100;
-} */
 
-.boxNav{
+.content {
     width: 100%;
-    height: 70px;
-    background-color: #0c1922;
+    height: 100vh;
     display: flex;
     align-items: center;
-    gap: 15px;
-    justify-content: right;
-    padding-right: 80px;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
-.tituloDocher{
-    color: aliceblue;
+.box-inicio {
+    width: 900px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.login-box {
+    padding: 40px;
+    background-color: #7d8a8d;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: slideInLeft 1s ease;
+}
+
+
+.color-label {
+    color: #556378;
+    font-weight: 600;
+}
+.brand-name {
+    color: #303f54;
+    font-weight: 600;
+}
+
+.login-img {
+    background-color: #303f54;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideInRight 1s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.btn-primary {
+    background-color: #303f54;
+    border-color: #303f54;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1e2a37;
+    border-color: #1e2a37;
+}
+
+a.text-light:hover {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+.custom-shape-divider-bottom-1681939430 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1681939430 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-bottom-1681939430 .shape-fill {
+    fill: #1d87ce;
 }
