@@ -1,6 +1,6 @@
 import React from "react";
 import '../style/menu.css';
-import LogoDocher from "../../public/logoDocher.jpg";
+import LogoDocher from "/logoDocher.jpg";
 
 
 const Menu = () => {

@@ -16,6 +16,7 @@ import notcontratoRouter from './backend/src/api/routes/contratos.routes.js';
 import productoRouter from './backend/src/api/routes/contratos.routes.js';
 import proveedorRouter from './backend/src/api/routes/proveedores.routes.js';
 import usuarioRouter from './backend/src/api/routes/usuarios.routes.js';
+import authTokenRouter from './backend/src/api/routes/auth.login.routes.js';
 
 
 
@@ -54,6 +55,7 @@ app.use('/notContrato', notcontratoRouter);
 app.use('/producto', productoRouter);
 app.use('/proveedor', proveedorRouter);
 app.use('/usuario', usuarioRouter);
+app.use('/auth-session',authSessionRouter)
 
 
 app.listen(port,()=>{
